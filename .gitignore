@@ -1,0 +1,15 @@
+# ملفات لا تُرفع إلى Git أبدًا
+.env
+/backups/
+/database/*.sqlite
+/database/*.sqlite-journal
+/database/*.sqlite-wal
+/database/*.sqlite-shm
+/storage/logs/*.log
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
+/public/assets/uploads/*
+.DS_Store
+Thumbs.db

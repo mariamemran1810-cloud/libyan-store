@@ -1,0 +1,55 @@
+# ============================================================
+#  المتجر الليبي — إعدادات Apache (للاستضافة المشتركة cPanel...)
+#  ضع هذا الملف في مجلد public/ (أي داخل الويب مباشرة)
+# ============================================================
+
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # كل طلب غير ملف موجود فعلًا يذهب إلى نقطة الدخول index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+
+    # --- موصى به بعد إصدار شهادة SSL (ابدئي الموقع بـ https) ---
+    # RewriteCond %{HTTPS} !=on
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ===== رؤوس أمان =====
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header always unset X-Powered-By
+</IfModule>
+
+# منع قراءة ملفات البداية (.htaccess و .env وغيرها)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# ===== ضغط النصوص (سرعة تحميل أسرع) =====
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# ===== تخزين مؤقت للملفات الثابتة =====
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css             "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/svg+xml        "access plus 1 year"
+    ExpiresByType image/x-icon         "access plus 1 year"
+    ExpiresByType image/png            "access plus 1 month"
+    ExpiresByType image/jpeg           "access plus 1 month"
+    ExpiresByType image/webp           "access plus 1 month"
+</IfModule>
+
+# تقليل معلومات الخادم
+ServerSignature Off
