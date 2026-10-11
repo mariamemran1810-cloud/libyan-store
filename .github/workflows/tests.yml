@@ -1,0 +1,35 @@
+name: الاختبارات
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: اختبارات المشروع الكاملة
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: تنزيل الكود
+        uses: actions/checkout@v4
+
+      - name: تجهيز PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_sqlite, mbstring
+          coverage: none
+
+      - name: نسخ إعدادات البيئة
+        run: cp .env.example .env
+
+      - name: إنشاء قاعدة البيانات والبيانات التجريبية
+        run: php scripts/migrate.php
+
+      - name: الاختبار الذاتي (75 فحصًا)
+        run: php docs/selftest.php
+
+      - name: اختبارات HTTP (98 سيناريوهًا)
+        run: php docs/httptest.php
