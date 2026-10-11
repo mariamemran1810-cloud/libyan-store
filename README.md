@@ -3,6 +3,13 @@
 متجر إلكتروني عربي بالكامل، بأسعار بالدينار الليبي (د.ل)، مبني بـ **PHP 8 + SQLite**
 بدون أي إطار خارجي — أي ملفات واضحة يمكنكِ فهمها وتعديلها بسهولة.
 
+**روابط سريعة:**
+
+| الرابط | العنوان |
+|--------|---------|
+| https://github.com/mariamemran1810-cloud/libyan-store | المستودع على GitHub (الكود كاملًا) |
+| https://mariamemran1810-cloud.github.io/libyan-store/ | صفحة العرض (GitHub Pages — ثابتة، لا تشغّل PHP) |
+
 ---
 
 ## 1) المتطلبات
@@ -209,6 +216,23 @@ php scripts/backup.php             # نسخة احتياطية لقاعدة ال
 - `/healthz` فحص صحة للمراقبة
 - `scripts/backup.php` نسخة احتياطية بالضغط الزمني
 - أيقونة موقع + og:url + JSON-LD للمنتجات (SEO أفضل)
+
+### النشر على GitHub Pages (صفحة العرض)
+
+- المستودع على GitHub: `https://github.com/mariamemran1810-cloud/libyan-store`
+- صفحة العرض المباشرة: `https://mariamemran1810-cloud.github.io/libyan-store/`
+- المصدر: ملف `docs/index.html` (وقد فُعّل Pages من مجلد `docs/` على فرع `main`)
+- **تحديث الصفحة:** عدّلي `docs/index.html` ثم:
+
+```powershell
+git add docs/index.html
+git commit -m "تحديث صفحة العرض"
+git push origin main     # يُعيد النشر تلقائيًا خلال دقيقة
+```
+
+> ⚠️ GitHub Pages ينشر ملفات ثابتة فقط ولا يشغّل PHP،
+> لذا هذه الصفحة تعريفية بالمشروع. تشغيل المتجر نفسه يحتاج خادم PHP
+> (الدليل الكامل في [docs/deploy.md](docs/deploy.md)).
 
 ---
 
