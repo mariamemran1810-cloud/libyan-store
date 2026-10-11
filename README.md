@@ -9,6 +9,7 @@
 |--------|---------|
 | https://github.com/mariamemran1810-cloud/libyan-store | المستودع على GitHub (الكود كاملًا) |
 | https://mariamemran1810-cloud.github.io/libyan-store/ | صفحة العرض (GitHub Pages — ثابتة، لا تشغّل PHP) |
+| [![الاختبارات](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml/badge.svg)](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml) | اختبارات تلقائية عند كل رفع (77 + 98 + بناء صورة النشر) |
 
 ---
 
@@ -166,7 +167,7 @@ libyan-store/
 php docs/selftest.php
 ```
 
-يتحقق من 75 نقطة: الإعدادات، التحقق من المدخلات، قاعدة البيانات، تشفير كلمات المرور،
+يتحقق من 77 نقطة: الإعدادات، التحقق من المدخلات، قاعدة البيانات، تشفير كلمات المرور،
 السلة، خصم المخزون، تراجع المعاملات عند نقص المخزون، تقييد معدل الطلبات،
 رسوم التوصيل حسب المدينة، مدة التحضير للمنتجات،
 اكتمال ملف اللغة العربية، رقم نسخة ملفات CSS، وألا توجد أسرار في الكود.
@@ -200,7 +201,13 @@ php scripts/backup.php             # نسخة احتياطية لقاعدة ال
 
 ### التجهيز للنشر (المرحلة السابعة)
 
-الدليل الكامل خطوة بخطوة (cPanel و VPS و nginx و SSL): **[docs/deploy.md](docs/deploy.md)**
+**ابدئي من هنا:** [docs/deploy-from-github.md](docs/deploy-from-github.md) —
+دليل عربي خطوة بخطوة لنشر المشروع من GitHub (Render بالـ Docker الجاهز، أو استضافة cPanel).
+
+الدليل الأعمق (VPS و nginx و SSL و نسخ احتياطي ومراقبة): **[docs/deploy.md](docs/deploy.md)**
+
+> ملفات النشر الجاهزة: `Dockerfile` + `docker/entrypoint.sh` + `render.yaml`
+> — كلها **مُختبرة تلقائيًا على GitHub Actions** (تُبنى الصورة وتُشغَّل وتُطلب `/healthz` مع كل رفع).
 
 باختصار:
 
