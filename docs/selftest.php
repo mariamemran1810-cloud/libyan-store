@@ -307,5 +307,33 @@ check('الملابس بلا مدة تحضير', $dressPrep === 0, (string) $dre
 check('نصوص الإعدادات ورسوم التوصيل مكتملة',
     isset($arLang['admin.settings'], $arLang['admin.f_delivery_cities'], $arLang['checkout.fee_by_city'], $arLang['product.prep_time']));
 
+// ===== حماية من مشكلة حساسية الأحرف (تنكسر على لينكس فقط) =====
+$mwOk = true;
+$mwBad = [];
+foreach (glob(BASE_PATH . '/app/Middleware/*.php') ?: [] as $mwFile) {
+    $mwSource = (string) file_get_contents($mwFile);
+    $mwExpected = basename($mwFile, '.php');
+    if (preg_match('/namespace\s+([^;]+);/', $mwSource, $mwNs)
+        && preg_match('/(?:final\s+)?class\s+(\w+)/', $mwSource, $mwClass)) {
+        if ($mwClass[1] !== $mwExpected || trim($mwNs[1]) !== 'App\\Middleware') {
+            $mwOk = false;
+            $mwBad[] = $mwExpected . '≠' . $mwClass[1];
+        }
+    }
+}
+check('اسم ملف الوسائط = اسم الصفوف بالضبط (حساس للأحرف)', $mwOk, implode(',', $mwBad));
+
+// كل وسيلة مذكورة في المسارات قابلة للاستدعاء بالحالة الصحيحة
+$routesSource = (string) file_get_contents(BASE_PATH . '/app/routes.php');
+preg_match_all("/'(auth|guest|role:[a-z]+)'/", $routesSource, $mwFound);
+$mwResolved = true;
+foreach (array_unique($mwFound[1]) as $mwName) {
+    $mwKey = explode(':', $mwName, 2)[0];
+    if (!class_exists('App\\Middleware\\' . ucfirst($mwKey) . 'Middleware')) {
+        $mwResolved = false;
+    }
+}
+check('كل وسائط المسارات تُحلّ إلى صفوف موجودة', $mwResolved && $mwFound[1] !== [], implode(',', array_unique($mwFound[1])));
+
 echo PHP_EOL . 'النتيجة: ' . $pass . ' ناجح، ' . $fail . ' فاشل' . PHP_EOL;
 exit($fail > 0 ? 1 : 0);

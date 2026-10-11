@@ -94,7 +94,8 @@ final class Router
     {
         foreach ($names as $name) {
             [$key, $argument] = array_pad(explode(':', $name, 2), 2, null);
-            $class = 'App\\Middleware\\' . $key . 'Middleware';
+            // أول حرف كبير: guest → GuestMiddleware (مهم على لينكس التي تفرّق بين الأحرف)
+            $class = 'App\\Middleware\\' . ucfirst($key) . 'Middleware';
 
             if (!class_exists($class)) {
                 throw new \RuntimeException('Middleware غير موجود: ' . $class);
