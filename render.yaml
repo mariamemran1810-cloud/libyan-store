@@ -1,0 +1,20 @@
+# إعداد النشر على Render.com (يرتبط بمستودع GitHub مباشرة)
+# الاستخدام: New → Web Service → اربط المستودع → Render يكتشف هذا الملف تلقائيًا
+services:
+  - type: web
+    name: libyan-store
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        value: https://libyan-store.onrender.com
+      # مفتاح تشفير عشوائي يولّده Render تلقائيًا (لا يُكتب في الكود أبدًا)
+      - key: APP_KEY
+        generateValue: true
+      - key: SESSION_NAME
+        value: libyan_store_session

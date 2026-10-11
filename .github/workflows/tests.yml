@@ -41,3 +41,40 @@ jobs:
           cat storage/logs/app.log 2>/dev/null || echo "(لا يوجد)"
           echo "===== سجل خادم الاختبار ====="
           tail -50 storage/logs/httptest-server.log 2>/dev/null || echo "(لا يوجد)"
+
+  docker:
+    name: صورة النشر (Docker)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: تنزيل الكود
+        uses: actions/checkout@v4
+
+      - name: بناء صورة النشر
+        run: docker build -t libyan-store:test .
+
+      - name: تشغيل الحاوية واختبار الموقع فعليًا
+        run: |
+          docker run -d --name store -p 8080:80 \
+            -e APP_ENV=production -e APP_DEBUG=false \
+            -e APP_URL=http://localhost:8080 \
+            libyan-store:test
+
+          ok=0
+          for i in $(seq 1 30); do
+            sleep 2
+            if curl -fsS http://localhost:8080/healthz; then ok=1; break; fi
+          done
+          if [ "$ok" != "1" ]; then echo "الخادم لم يستجب"; exit 1; fi
+
+          echo "===== الصفحة الرئيسية (أول 400 حرف) ====="
+          curl -fsS http://localhost:8080/ | head -c 400
+          echo ""
+          echo "===== صفحة منتج ====="
+          curl -fsS -o /dev/null -w "%{http_code}\n" http://localhost:8080/products/arabic-coffee-hail
+          echo "===== صفحة سلة ====="
+          curl -fsS -o /dev/null -w "%{http_code}\n" http://localhost:8080/cart
+
+      - name: سجل الحاوية عند الفشل
+        if: failure()
+        run: docker logs store

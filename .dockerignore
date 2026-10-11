@@ -1,0 +1,13 @@
+# ملفات لا تُنسخ إلى صورة النشر
+.git
+.github
+.env
+backups
+docs
+database/*.sqlite
+database/*.sqlite-journal
+database/*.sqlite-wal
+database/*.sqlite-shm
+storage/logs/*.log
+storage/uploads/*
+!storage/uploads/.gitkeep
