@@ -33,3 +33,11 @@ jobs:
 
       - name: اختبارات HTTP (98 سيناريوهًا)
         run: php docs/httptest.php
+
+      - name: عرض سجل التطبيق عند الفشل
+        if: failure()
+        run: |
+          echo "===== سجل التطبيق ====="
+          cat storage/logs/app.log 2>/dev/null || echo "(لا يوجد)"
+          echo "===== سجل خادم الاختبار ====="
+          tail -50 storage/logs/httptest-server.log 2>/dev/null || echo "(لا يوجد)"
