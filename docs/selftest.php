@@ -335,5 +335,29 @@ foreach (array_unique($mwFound[1]) as $mwName) {
 }
 check('كل وسائط المسارات تُحلّ إلى صفوف موجودة', $mwResolved && $mwFound[1] !== [], implode(',', array_unique($mwFound[1])));
 
+// ===== جاهزية الإنتاج =====
+// 1) متغيرات بيئة التشغيل الحقيقية تتفوق على ملف .env (Render / VPS / cPanel)
+putenv('SELFTEST_ENV_CASE=قيمة من البيئة');
+check('متغير البيئة يتفوق على ملف .env', Env::get('SELFTEST_ENV_CASE', 'افتراضي') === 'قيمة من البيئة');
+putenv('SELFTEST_ENV_CASE');
+check('المفتاح الغائب يرجع القيمة الافتراضية', Env::get('SELFTEST_ENV_CASE', 'افتراضي') === 'افتراضي');
+putenv('SELFTEST_BOOL_CASE=false');
+check('Env::bool يقرأ من البيئة', Env::bool('SELFTEST_BOOL_CASE', true) === false);
+putenv('SELFTEST_BOOL_CASE');
+
+// 2) انتظار عند التزامن (يمنع خطأ "database is locked" على خادم ويب متعدد الطلبات)
+check('SQLite ينتظر حتى ينتهي المقفل (busy_timeout = 5000)', (int) Database::scalar('PRAGMA busy_timeout') === 5000);
+
+// 3) تدوير سجل الأخطاء حتى لا يكبر بلا حد
+$tmpLog = sys_get_temp_dir() . '/selftest-log-rotate.log';
+$tmpLogOld = $tmpLog . '.1';
+@unlink($tmpLog);
+@unlink($tmpLogOld);
+file_put_contents($tmpLog, str_repeat('x', 2_100_000));
+\App\Core\Errors::log(new \RuntimeException('selftest-rotate'), $tmpLog);
+check('تدوير السجل عند تجاوز 2MB', is_file($tmpLogOld) && is_file($tmpLog) && filesize($tmpLog) < 2_000_000);
+@unlink($tmpLog);
+@unlink($tmpLogOld);
+
 echo PHP_EOL . 'النتيجة: ' . $pass . ' ناجح، ' . $fail . ' فاشل' . PHP_EOL;
 exit($fail > 0 ? 1 : 0);

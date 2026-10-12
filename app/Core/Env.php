@@ -48,29 +48,37 @@ final class Env
 
     public static function get(string $key, string $default = ''): string
     {
+        // متغيرات بيئة التشغيل الحقيقية (Render/cPanel/VPS) أولاً، ثم ملف .env
+        $fromEnv = getenv($key);
+        if ($fromEnv !== false && $fromEnv !== '') {
+            return $fromEnv;
+        }
+
         return self::$values[$key] ?? $default;
     }
 
     public static function int(string $key, int $default = 0): int
     {
-        if (!isset(self::$values[$key]) || !is_numeric(self::$values[$key])) {
+        $value = self::get($key, '');
+        if ($value === '' || !is_numeric($value)) {
             return $default;
         }
 
-        return (int) self::$values[$key];
+        return (int) $value;
     }
 
     public static function bool(string $key, bool $default = false): bool
     {
-        if (!isset(self::$values[$key])) {
+        $value = self::get($key, '');
+        if ($value === '') {
             return $default;
         }
 
-        return in_array(strtolower(self::$values[$key]), ['1', 'true', 'yes', 'on'], true);
+        return in_array(strtolower($value), ['1', 'true', 'yes', 'on'], true);
     }
 
     public static function has(string $key): bool
     {
-        return isset(self::$values[$key]) && self::$values[$key] !== '';
+        return self::get($key, '') !== '';
     }
 }

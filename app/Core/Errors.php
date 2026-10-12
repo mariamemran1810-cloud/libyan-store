@@ -36,7 +36,10 @@ final class Errors
         });
     }
 
-    public static function log(Throwable $e): void
+    /** أقصى حجم لملف السجل قبل التدوير (2 ميغابايت) */
+    private const LOG_MAX_BYTES = 2_000_000;
+
+    public static function log(Throwable $e, ?string $path = null): void
     {
         $dir = BASE_PATH . '/storage/logs';
         if (!is_dir($dir)) {
@@ -53,7 +56,14 @@ final class Errors
             $e->getTraceAsString()
         );
 
-        @file_put_contents($dir . '/app.log', $line, FILE_APPEND | LOCK_EX);
+        $logFile = $path ?? ($dir . '/app.log');
+
+        // تدوير السجل حتى لا يكبر بلا حد على الخادم
+        if (is_file($logFile) && @filesize($logFile) > self::LOG_MAX_BYTES) {
+            @rename($logFile, $logFile . '.1');
+        }
+
+        @file_put_contents($logFile, $line, FILE_APPEND | LOCK_EX);
     }
 
     public static function render(Throwable $e): void

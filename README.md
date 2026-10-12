@@ -9,7 +9,7 @@
 |--------|---------|
 | https://github.com/mariamemran1810-cloud/libyan-store | المستودع على GitHub (الكود كاملًا) |
 | https://mariamemran1810-cloud.github.io/libyan-store/ | صفحة العرض (GitHub Pages — ثابتة، لا تشغّل PHP) |
-| [![الاختبارات](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml/badge.svg)](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml) | اختبارات تلقائية عند كل رفع (77 + 98 + بناء صورة النشر) |
+| [![الاختبارات](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml/badge.svg)](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml) | اختبارات تلقائية عند كل رفع (82 + 98 + بناء صورة النشر) |
 
 ---
 
@@ -167,10 +167,11 @@ libyan-store/
 php docs/selftest.php
 ```
 
-يتحقق من 77 نقطة: الإعدادات، التحقق من المدخلات، قاعدة البيانات، تشفير كلمات المرور،
+يتحقق من 82 نقطة: الإعدادات، التحقق من المدخلات، قاعدة البيانات، تشفير كلمات المرور،
 السلة، خصم المخزون، تراجع المعاملات عند نقص المخزون، تقييد معدل الطلبات،
 رسوم التوصيل حسب المدينة، مدة التحضير للمنتجات،
-اكتمال ملف اللغة العربية، رقم نسخة ملفات CSS، وألا توجد أسرار في الكود.
+اكتمال ملف اللغة العربية، رقم نسخة ملفات CSS، جاهزية الإنتاج (متغيرات البيئة،
+انتظار القاعدة عند التزامن، تدوير سجل الأخطاء)، وألا توجد أسرار في الكود.
 
 ### اختبارات HTTP الكاملة (المرحلة السادسة)
 

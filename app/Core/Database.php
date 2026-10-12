@@ -48,6 +48,8 @@ final class Database
             ]);
             self::$pdo->exec('PRAGMA foreign_keys = ON');
             self::$pdo->exec('PRAGMA journal_mode = WAL');
+            // انتظار بدل رسالة "قاعدة البيانات مقفلة" عند كتابتين متزامنتين (خادم ويب متعدد الطلبات)
+            self::$pdo->exec('PRAGMA busy_timeout = 5000');
         }
 
         return self::$pdo;

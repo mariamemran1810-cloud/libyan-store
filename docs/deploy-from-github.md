@@ -65,7 +65,7 @@
    nano .env          # عدّلي APP_URL لرابطك واحفظي (Ctrl+O ثم Enter ثم Ctrl+X)
    php scripts/migrate.php
    ```
-5. غيّري كلمة مرور `APP_KEY` (إن وُجدت) وأضيفي حسابك الخاص:
+5. أنشئي حسابك الخاص (وليس الحسابات التجريبية):
    ```bash
    php scripts/migrate.php --admin="بريدك" --password="كلمة-سر-قوية"
    ```
