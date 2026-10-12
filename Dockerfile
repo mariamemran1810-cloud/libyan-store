@@ -6,7 +6,8 @@
 FROM php:8.3-apache
 
 # وحدات Apache المطلوبة لملف .htaccess (توجيه الطلبات، الضغط، الرؤوس، الكاش)
-RUN a2enmod rewrite deflate headers expires
+# ملاحظة: AddOutputFilterByType في Apache 2.4 ينتمي إلى mod_filter
+RUN a2enmod rewrite deflate filter headers expires
 
 # جعل مجلد public/ هو جذر الويب
 RUN sed -ri 's!/var/www/html!/var/www/html/public!g' \

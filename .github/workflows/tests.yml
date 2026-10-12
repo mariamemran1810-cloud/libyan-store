@@ -75,7 +75,8 @@ jobs:
           echo "===== صفحة سلة ====="
           curl -fsS -o /dev/null -w "%{http_code}\n" http://localhost:8080/cart
           echo "===== فحص الضغط (gzip) ====="
-          curl -fsSI -H "Accept-Encoding: gzip" http://localhost:8080/ | grep -i "content-encoding" || (echo "الضغط غير مفعّل"; exit 1)
+          curl -fsS -D - -o /dev/null -H "Accept-Encoding: gzip" http://localhost:8080/ \
+            | grep -i "content-encoding" || (echo "الضغط غير مفعّل"; exit 1)
 
       - name: سجل الحاوية عند الفشل
         if: failure()
