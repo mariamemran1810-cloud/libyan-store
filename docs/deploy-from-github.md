@@ -15,6 +15,12 @@
 
 ## أ) النشر على Render.com (الأسرع)
 
+**زر النشر بضغطة واحدة** (يفتح Render مباشرة مع `render.yaml` جاهزًا):
+
+[![Deploy to Render](https://render.com/images/render-deploy-button.svg)](https://render.com/deploy?repo=https://github.com/mariamemran1810-cloud/libyan-store)
+
+إن لم يعمل الزر، التدوين اليدوي خطوة بخطوة:
+
 ملف `render.yaml` في جذر المستودع يحمل الإعدادات كاملة، فيكفي ربط الحساب:
 
 1. أنشئي حسابًا مجانيًا على **render.com** (بالبريد أو بحساب GitHub).

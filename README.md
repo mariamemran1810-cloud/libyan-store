@@ -11,6 +11,9 @@
 | https://mariamemran1810-cloud.github.io/libyan-store/ | صفحة العرض (GitHub Pages — ثابتة، لا تشغّل PHP) |
 | [![الاختبارات](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml/badge.svg)](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml) | اختبارات تلقائية عند كل رفع (86 + 104 + بناء صورة النشر) |
 
+**🚀 نشر بضغطة واحدة:** [انشر على Render](https://render.com/deploy?repo=https://github.com/mariamemran1810-cloud/libyan-store)
+(الدليل: [docs/deploy-from-github.md](docs/deploy-from-github.md))
+
 ---
 
 ## 1) المتطلبات
