@@ -67,6 +67,11 @@ final class Router
 
         $method = strtoupper($method);
 
+        // HEAD يُعامل مثل GET (متطلب معياري: يفحصه فحّاص الخوادم والمحركات)
+        if ($method === 'HEAD') {
+            $method = 'GET';
+        }
+
         foreach ($this->routes as $route) {
             if ($route['method'] !== $method) {
                 continue;

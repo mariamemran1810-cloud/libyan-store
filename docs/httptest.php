@@ -73,6 +73,11 @@ final class Http
         return $this->send('GET', $path);
     }
 
+    public function head(string $path): array
+    {
+        return $this->send('HEAD', $path);
+    }
+
     public function post(string $path, array $data = [], string $referer = ''): array
     {
         return $this->send('POST', $path, $data, $referer);
@@ -317,6 +322,14 @@ try {
     check('عنوان h1 واحد فقط في الرئيسية', substr_count($home['body'], '<h1') === 1, (string) substr_count($home['body'], '<h1'));
     check('رؤوس أمان HTTP موجودة', isset($home['headers']['x-content-type-options']) && $home['headers']['x-content-type-options'] === 'nosniff');
     check('إخفاء رأس X-Powered-By', !isset($home['headers']['x-powered-by']));
+
+    // طلبات HEAD (يستخدمها فحّاصو الخوادم وبيانات المراقبة)
+    $headHome = $guest->head('/');
+    check('طلب HEAD للرئيسية يعيد 200', $headHome['status'] === 200, (string) $headHome['status']);
+    $headList = $guest->head('/products');
+    check('طلب HEAD لصفحة المنتجات يعيد 200', $headList['status'] === 200, (string) $headList['status']);
+    $headMissing = $guest->head('/no-such-page-here');
+    check('طلب HEAD لصفحة غير موجودة يعيد 404', $headMissing['status'] === 404, (string) $headMissing['status']);
 
     $list = $guest->get('/products');
     check('صفحة المنتجات تُحمّل (200)', $list['status'] === 200, (string) $list['status']);
