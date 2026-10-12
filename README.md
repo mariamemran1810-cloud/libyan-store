@@ -9,7 +9,7 @@
 |--------|---------|
 | https://github.com/mariamemran1810-cloud/libyan-store | المستودع على GitHub (الكود كاملًا) |
 | https://mariamemran1810-cloud.github.io/libyan-store/ | صفحة العرض (GitHub Pages — ثابتة، لا تشغّل PHP) |
-| [![الاختبارات](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml/badge.svg)](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml) | اختبارات تلقائية عند كل رفع (82 + 101 + بناء صورة النشر) |
+| [![الاختبارات](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml/badge.svg)](https://github.com/mariamemran1810-cloud/libyan-store/actions/workflows/tests.yml) | اختبارات تلقائية عند كل رفع (86 + 104 + بناء صورة النشر) |
 
 ---
 
@@ -167,7 +167,7 @@ libyan-store/
 php docs/selftest.php
 ```
 
-يتحقق من 82 نقطة: الإعدادات، التحقق من المدخلات، قاعدة البيانات، تشفير كلمات المرور،
+يتحقق من 86 نقطة: الإعدادات، التحقق من المدخلات، قاعدة البيانات، تشفير كلمات المرور،
 السلة، خصم المخزون، تراجع المعاملات عند نقص المخزون، تقييد معدل الطلبات،
 رسوم التوصيل حسب المدينة، مدة التحضير للمنتجات،
 اكتمال ملف اللغة العربية، رقم نسخة ملفات CSS، جاهزية الإنتاج (متغيرات البيئة،
@@ -179,7 +179,7 @@ php docs/selftest.php
 php docs/httptest.php
 ```
 
-يشغّل **خادمًا مؤقتًا على منفذ مستقل** (لا يحتاج خادمك المفتوح) وينفّذ 101 سيناريوهًا
+يشغّل **خادمًا مؤقتًا على منفذ مستقل** (لا يحتاج خادمك المفتوح) وينفّذ 104 سيناريوهًا
 حقيقيًا بطلب HTTP كامل، ثم **ينظف كل بيانات الاختبار تلقائيًا**:
 
 | المجموعة | ما يختبره |

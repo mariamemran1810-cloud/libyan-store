@@ -792,6 +792,15 @@ try {
     check('healthz يعيد حالة سليمة', $health['status'] === 200 && str_contains($health['body'], '"status":"ok"'), $health['body']);
 
     check('أيقونة favicon مربوطة في الترويسة', str_contains($home['body'], 'favicon.svg'));
+
+    // ملفات التثبيت (PWA) — روابط تنزيل المنصة على أندرويد وويندوز
+    $manifestReq = $guest->get('/manifest.webmanifest');
+    check('manifest.webmanifest يُقدَّم (200 + اسم عربي)', $manifestReq['status'] === 200
+        && str_contains($manifestReq['body'], 'standalone')
+        && str_contains($manifestReq['body'], 'المتجر الليبي'));
+    check('الترويسة تعلق manifest للتطبيق', str_contains($home['body'], 'rel="manifest"'));
+    $swReq = $guest->get('/sw.js');
+    check('sw.js (عامل الخدمة) يُقدَّم (200)', $swReq['status'] === 200 && str_contains($swReq['body'], "addEventListener('fetch'"));
     check('og:url موجود في الترويسة', str_contains($home['body'], 'property="og:url"'));
     check('رابط CSS يحمل رقم نسخة (?v=) لتفادي الكاش', str_contains($home['body'], 'app.css?v='));
     check('بيانات JSON-LD للمنتج موجودة', str_contains($storefront['body'], 'application/ld+json') && str_contains($storefront['body'], '"priceCurrency"'));

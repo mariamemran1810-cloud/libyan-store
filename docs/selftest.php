@@ -359,5 +359,21 @@ check('تدوير السجل عند تجاوز 2MB', is_file($tmpLogOld) && is_f
 @unlink($tmpLog);
 @unlink($tmpLogOld);
 
+// ===== تثبيت المنصة (PWA) على أندرويد وويندوز =====
+$manifestPath = BASE_PATH . '/public/manifest.webmanifest';
+$manifest = is_file($manifestPath) ? json_decode((string) file_get_contents($manifestPath), true) : null;
+check('ملف manifest صالح ويحدد وضع التطبيق', is_array($manifest)
+    && ($manifest['start_url'] ?? '') === '/'
+    && ($manifest['display'] ?? '') === 'standalone'
+    && ($manifest['dir'] ?? '') === 'rtl'
+    && ($manifest['icons'] ?? []) !== []);
+
+$swSource = (string) file_get_contents(BASE_PATH . '/public/sw.js');
+check('عامل الخدمة موجود ويعرف الكاش والجلب', str_contains($swSource, 'CACHE') && str_contains($swSource, "addEventListener('fetch'"));
+
+$layoutSource = (string) file_get_contents(BASE_PATH . '/views/layouts/main.php');
+check('الترويسة تربط بملف manifest', str_contains($layoutSource, 'rel="manifest"'));
+check('الجافاسكربت يسجّل عامل الخدمة', str_contains((string) file_get_contents(BASE_PATH . '/public/assets/js/app.js'), "serviceWorker.register('/sw.js')"));
+
 echo PHP_EOL . 'النتيجة: ' . $pass . ' ناجح، ' . $fail . ' فاشل' . PHP_EOL;
 exit($fail > 0 ? 1 : 0);

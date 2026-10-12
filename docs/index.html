@@ -143,8 +143,8 @@
     </div>
 
     <div class="stats">
-        <div class="stat"><b>82/82</b><span>فحص ذاتي ناجح</span></div>
-        <div class="stat"><b>101/101</b><span>سيناريو اختبار HTTP</span></div>
+        <div class="stat"><b>86/86</b><span>فحص ذاتي ناجح</span></div>
+        <div class="stat"><b>104/104</b><span>سيناريو اختبار HTTP</span></div>
         <div class="stat"><b>7</b><span>مراحل تنفيذ مكتملة</span></div>
         <div class="stat"><b>6 × 20</b><span>أقسام × منتجًا تجريبيًا</span></div>
         <div class="stat"><b>3</b><span>أدوار وصلاحيات</span></div>
@@ -160,6 +160,7 @@
             <div class="card"><span class="ico">🔐</span><h3>ثلاثة أدوار</h3><p>مسؤولة تدير كل شيء، بائعة للمنتجات والطلبات، عميلة تتسوّق وتتابع طلباتها.</p></div>
             <div class="card"><span class="ico">🛡️</span><h3>حماية</h3><p>رموز CSRF، تحقق من المدخلات، تقييد محاولات الدخول، رؤوس أمنية، ورفض رفع ملفات PHP.</p></div>
             <div class="card"><span class="ico">🔎</span><h3>SEO وسرعة</h3><p>وسوم meta و Open Graph و JSON-LD، خريطة موقع و robots.txt ديناميكيان، وكاش بصمة زمنية للملفات.</p></div>
+            <div class="card"><span class="ico">⬇️</span><h3>تثبيت كتطبيق</h3><p>يعمل على أندرويد وويندوز وآيفون كتطبيق مستقل عبر PWA، بروابط تنزيل مختصرة بلا متجر تطبيقات.</p></div>
         </div>
     </section>
 
@@ -174,6 +175,34 @@
             <span class="chip">🍽️ مطاعم - وجبات</span>
             <span class="chip">🍔 وجبات سريعة</span>
         </div>
+    </section>
+
+    <section id="download">
+        <h2>⬇️ تنزيل المنصة</h2>
+        <p class="sub">تُثبَّت كتطبيق على جهازك بنقرة (PWA) — بلا ملف APK وبلا متجر تطبيقات.</p>
+        <div class="grid">
+            <div class="card">
+                <span class="ico">🤖</span>
+                <h3>أندرويد — Chrome</h3>
+                <p>افتحي رابط المتجر ← قائمة ⋮ ← <b>«إضافة إلى الشاشة الرئيسية»</b> أو <b>«تثبيت التطبيق»</b>.</p>
+                <a class="btn btn-primary" style="margin-top:12px" href="https://libyan-store.onrender.com" target="_blank" rel="noopener">فتح المتجر</a>
+            </div>
+            <div class="card">
+                <span class="ico">🪟</span>
+                <h3>ويندوز — Edge أو Chrome</h3>
+                <p>افتحي رابط المتجر ← قائمة ⋮ ← <b>«تطبيق ← تثبيت هذا الموقع»</b>، ويظهر أيقونته في قائمة ابدأ.</p>
+                <a class="btn btn-primary" style="margin-top:12px" href="https://libyan-store.onrender.com" target="_blank" rel="noopener">فتح المتجر</a>
+            </div>
+            <div class="card">
+                <span class="ico">📱</span>
+                <h3>آيفون — Safari</h3>
+                <p>افتحي الرابط ← زر المشاركة ← <b>«إضافة إلى الشاشة الرئيسية»</b>.</p>
+                <a class="btn btn-ghost" style="margin-top:12px" href="https://mariamemran1810-cloud.github.io/libyan-store/" target="_blank" rel="noopener">صفحة العرض</a>
+            </div>
+        </div>
+        <p class="sub" style="margin-top:16px">الرابط أعلاه يظهر فور ربط Render بالمستودع (انظري <code class="inline">docs/deploy-from-github.md</code>).</p>
+<pre>&lt;link rel="manifest" href="/manifest.webmanifest"&gt;   <span style="color:#7fd6a5"># تعريف التطبيق</span>
+navigator.serviceWorker.register('/sw.js')             <span style="color:#7fd6a5"># الكاش والعمل دون اتصال</span></pre>
     </section>
 
     <section id="run">
@@ -201,7 +230,7 @@ php -S 127.0.0.1:8000 -t public public/index.php</pre>
             <div class="step"><b>✅ 3</b> قاعدة البيانات والحسابات ولوحة الإدارة</div>
             <div class="step"><b>✅ 4</b> السلة وإتمام الطلب مع حماية المخزون</div>
             <div class="step"><b>✅ 5</b> الصلاحيات وإدارة الأقسام وحساب المستخدم</div>
-            <div class="step"><b>✅ 6</b> الاختبارات: 82 فحصًا ذاتيًا و101 سيناريو HTTP + اختبار صورة النشر</div>
+            <div class="step"><b>✅ 6</b> الاختبارات: 86 فحصًا ذاتيًا و104 سيناريو HTTP + اختبار صورة النشر</div>
             <div class="step"><b>✅ 7</b> التجهيز للنشر: SEO، نسخ احتياطي، دليل نشر كامل</div>
         </div>
     </section>

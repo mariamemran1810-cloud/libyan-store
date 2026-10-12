@@ -11,4 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(function () { el.remove(); }, 400);
     }, 5000);
   });
+
+  // تفعيل عامل الخدمة (يعمل التطبيق كتطبيق مثبّت على أندرويد وويندوز)
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    navigator.serviceWorker.register('/sw.js').catch(function () {
+      /* الصامت: التثبيت اختياري ولا يؤثر على التسوق */
+    });
+  }
 });
