@@ -794,8 +794,8 @@ try {
     check('أيقونة favicon مربوطة في الترويسة', str_contains($home['body'], 'favicon.svg'));
 
     // ملفات التثبيت (PWA) — روابط تنزيل المنصة على أندرويد وويندوز
-    $manifestReq = $guest->get('/manifest.webmanifest');
-    check('manifest.webmanifest يُقدَّم (200 + اسم عربي)', $manifestReq['status'] === 200
+    $manifestReq = $guest->get('/manifest.json');
+    check('manifest.json يُقدَّم (200 + اسم عربي)', $manifestReq['status'] === 200
         && str_contains($manifestReq['body'], 'standalone')
         && str_contains($manifestReq['body'], 'المتجر الليبي'));
     check('الترويسة تعلق manifest للتطبيق', str_contains($home['body'], 'rel="manifest"'));

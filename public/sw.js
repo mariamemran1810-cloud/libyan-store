@@ -4,7 +4,7 @@
    وحتى عند ضعف الشبكة. الصفحات تُجلب دائمًا من الخادم.
    ============================================================ */
 const CACHE = 'libyan-store-v1';
-const STATIC = ['/assets/css/app.css', '/assets/js/app.js', '/favicon.svg', '/manifest.webmanifest'];
+const STATIC = ['/assets/css/app.css', '/assets/js/app.js', '/favicon.svg', '/manifest.json'];
 
 self.addEventListener('install', (event) => {
     event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(STATIC)).then(() => self.skipWaiting()));

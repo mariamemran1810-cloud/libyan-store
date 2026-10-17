@@ -15,7 +15,7 @@ $flash = function_exists('flash_messages') ? flash_messages() : [];
     <meta name="theme-color" content="#0f766e">
     <link rel="icon" type="image/svg+xml" href="<?= e(url('/favicon.svg')) ?>">
     <link rel="apple-touch-icon" href="<?= e(url('/favicon.svg')) ?>">
-    <link rel="manifest" href="<?= e(url('/manifest.webmanifest')) ?>">
+    <link rel="manifest" href="<?= e(url('/manifest.json')) ?>">
     <title><?= e($page['title'] ?? 'المتجر الليبي') ?></title>
     <?php if (!empty($page['description'])): ?>
         <meta name="description" content="<?= e($page['description']) ?>">
